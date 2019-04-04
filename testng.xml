@@ -1,0 +1,7 @@
+<suite name="BookMyEditor TestSuite">
+	<test name="createInitializeAcceptBooking">
+		<classes>
+			<class name="TestCases.CreateBookingRequest"></class>
+		</classes>
+	</test>
+</suite>
