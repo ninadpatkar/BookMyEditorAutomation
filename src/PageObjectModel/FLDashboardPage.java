@@ -77,6 +77,39 @@ public class FLDashboardPage {
 		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
 	}
 	
+	/*
+	 * Function to reject first booking from the list
+	*/
+	public void rejectBooking(String bookingTitle) throws InterruptedException {
+		//Waiting until the loader is gone.
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("modal-1")));
+		
+		wait.until(ExpectedConditions.elementToBeClickable(availableAssignmentsTab));
+		clickAvailableAssignmentsTab();
+		
+		//Waiting until the loader is gone.
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+		
+		String xpathRespondButton = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//button[contains(text(),'Respond')]";
+		
+		//table[@id='collapsableTable']/tbody/tr[2]/td[7]//button[@class='btn btn-secondary dropdown-toggle']
+		respondButton = driver.findElement(By.xpath(xpathRespondButton));
+		respondButton.click();
+		System.out.println("Selecting the Respond option for the booking :"+bookingTitle);
+
+		Thread.sleep(2000);
+		
+		acceptBookingOption = driver.findElement(By.linkText("Reject request"));
+		acceptBookingOption.click();
+		System.out.println("Selecting the reject booking option");
+		
+		//selecting first rejet reason 'Not available'
+		
+		
+		//Waiting until the loader is gone.
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+	}
+	
 	public void closeEarningsDashboard() {
 		
 		
