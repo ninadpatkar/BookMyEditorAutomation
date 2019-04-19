@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [BookMyEditor TestSuite]">
-  <test name="createInitializeAcceptBooking(failed)">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Default suite]">
+  <test name="Default test(failed)">
     <classes>
       <class name="TestCases.CreateBookingRequest">
         <methods>
-          <include name="createBookingOneFL" invocation-numbers="0"/>
-          <include name="tearDown"/>
-          <include name="startUp"/>
+          <include name="testClose"/>
+          <include name="createBookingAccept" invocation-numbers="0"/>
+          <include name="createBookingReject" invocation-numbers="0"/>
+          <include name="testSetup"/>
         </methods>
       </class> <!-- TestCases.CreateBookingRequest -->
     </classes>
-  </test> <!-- createInitializeAcceptBooking(failed) -->
-</suite> <!-- Failed suite [BookMyEditor TestSuite] -->
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->

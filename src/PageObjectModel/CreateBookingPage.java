@@ -84,7 +84,7 @@ public class CreateBookingPage {
 		Thread.sleep(2000);
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//remove only previous filter by clicking
 		onlyPrevEditorCheck = driver.findElement(By.id("previous_editor"));
@@ -92,7 +92,7 @@ public class CreateBookingPage {
 		Thread.sleep(5000);
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//search for the test editor
 		editorSearchBox = driver.findElement(By.id("editor_worker_code"));
@@ -102,7 +102,7 @@ public class CreateBookingPage {
 		Thread.sleep(5000);
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		
 		//select first editor from the list
@@ -116,13 +116,13 @@ public class CreateBookingPage {
 		System.out.println("Saving editor list");
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//save booking
 		saveBookingButton = driver.findElement(By.id("submit_create_booking_step_3"));
 		saveBookingButton.click();
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 	}
 }

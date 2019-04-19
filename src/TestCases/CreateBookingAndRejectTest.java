@@ -20,12 +20,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
 
-public class CreateBookingRequest {
+public class CreateBookingAndRejectTest {
 	WebDriver driver;
 	
 	//declared wait object for explicit wait
@@ -47,12 +47,12 @@ public class CreateBookingRequest {
 	//initilizing soft assert object
 	SoftAssert sa = new SoftAssert();
 	
-	/*
-	 * Test case creates an INQ, creates and initializes a booking, assigns to one FL, and accepts from the FL Dashboard
-	 * @params input parameters for INQ, Booking, login credentials for CM and FL
+	/*	 
+	 *  Test case creates an INQ, creates and initializes a booking, assigns to one FL, and rejects from the FL Dashboard
+	 * 	@params input parameters for INQ, Booking, login credentials for CM and FL
 	*/
-	@Test(dataProvider="inputsBME", dataProviderClass=BMETestData.class)
-	public void createBookingOneFL(String login_email, String login_passwd, String email, String service, String document, String subject, String enquiry, String units, String title, String job_date, String editor, String login_email_fl, String login_passwd_fl ) throws InterruptedException {
+	@Test(dataProvider="inputsBME", dataProviderClass=BMETestData.class, priority=2)
+	public void createBookingReject(String login_email, String login_passwd, String email, String service, String document, String subject, String enquiry, String units, String title, String job_date, String editor, String login_email_fl, String login_passwd_fl ) throws InterruptedException {
 		
 		//Open CRM url
 		driver.get(Constants.CRM_URL);
@@ -127,6 +127,8 @@ public class CreateBookingRequest {
 		sa.assertEquals(subject, subjectBooking);
 		sa.assertEquals(bookingStatus, "NEW");
 		
+		System.out.println("Booking with title "+bookingTitle+" is in status : "+bookingStatus);
+		
 		//initialize the booking
 		pg_viewBooking.initializeBooking();
 		
@@ -138,6 +140,8 @@ public class CreateBookingRequest {
 		
 		//Assert on the status of the booking
 		sa.assertEquals(bookingStatus, "PENDING");
+		
+		System.out.println("Booking with title "+bookingTitle+" is in status : "+bookingStatus);
 		
 		//Logout from CM Dashboard
 		pg_TopHeader.clickLogoutSubmenu();
@@ -155,9 +159,9 @@ public class CreateBookingRequest {
 		pg_flDashboard.closeEarningsDashboard();
 		
 		//accepting the booking request
-		pg_flDashboard.acceptBooking(bookingTitle);
+		pg_flDashboard.rejectBooking(bookingTitle);
 		
-		//login from FL Dashboard
+		//logout from FL Dashboard
 		pg_TopHeader.clickLogoutSubmenu();
 		
 		//Waiting until the page is loaded.
@@ -175,13 +179,26 @@ public class CreateBookingRequest {
 		bookingStatus = pg_viewBooking.getBookingStatus();
 		
 		//Assert on the status of the booking
-		sa.assertEquals(bookingStatus, "CONFIRMED");
+		sa.assertEquals(bookingStatus, "REJECTED");
+		
+		System.out.println("Booking with title "+bookingTitle+" is in status : "+bookingStatus);
+		
+		//fetching status of the fl response
+		String flResponseStatus = pg_viewBooking.getFLResponse(editor);
+				
+		//Assert on the status of the fl response
+		sa.assertEquals(flResponseStatus, "Rejected");
+		
+		System.out.println("FL "+editor+" response for booking "+bookingTitle+" is : "+flResponseStatus);
+		
+		//logout from FL Dashboard
+		pg_TopHeader.clickLogoutSubmenu();
 		
 		sa.assertAll();
 	}
 	
-	@BeforeClass
-	public void startUp() throws Exception {
+	@BeforeMethod
+	public void testSetup() throws Exception {
 	  
 		//set system property for chrome driver
 		System.setProperty(Constants.ChromeDriver_property, Constants.ChromeDriver_path);
@@ -205,10 +222,9 @@ public class CreateBookingRequest {
 
 	}
 
-	@AfterClass
-	public void tearDown() throws InterruptedException {
+	@AfterMethod
+	public void testClose() throws InterruptedException {
 		Thread.sleep(3000);
 		driver.quit();
-	}
-
+	}	
 }

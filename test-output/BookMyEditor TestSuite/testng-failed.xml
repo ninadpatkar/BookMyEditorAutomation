@@ -5,8 +5,9 @@
     <classes>
       <class name="TestCases.CreateBookingRequest">
         <methods>
-          <include name="createBookingOneFL" invocation-numbers="0"/>
+          <include name="createBookingAccept" invocation-numbers="0"/>
           <include name="tearDown"/>
+          <include name="testTearDown"/>
           <include name="startUp"/>
         </methods>
       </class> <!-- TestCases.CreateBookingRequest -->
