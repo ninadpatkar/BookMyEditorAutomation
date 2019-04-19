@@ -79,7 +79,7 @@ public class AddNewEnquiryPage {
 		Thread.sleep(5000);
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//enter the service name
 		seviceSelectList = driver.findElement(By.xpath("/html//span[@id='select2-service_id-container']"));
@@ -94,7 +94,7 @@ public class AddNewEnquiryPage {
 		Thread.sleep(5000);
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//select no for is this a rework for previous job question
 		isItaMRENo = driver.findElement(By.id("field_enq_ex_is_it_mre_no"));
@@ -158,7 +158,7 @@ public class AddNewEnquiryPage {
 		Thread.sleep(5000);
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//click on select plan button
 		planSelectButton = driver.findElement(By.id("select-tat"));
@@ -166,14 +166,14 @@ public class AddNewEnquiryPage {
 		System.out.println("Selecting first plan from the recommender");
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//select previously set payment preferences
 		paymentPrefPrevButton = driver.findElement(By.xpath("/html//div[@id='psit-preference-buttons']/div[1]/div[@class='form-group']/button[@type='button']"));
 		paymentPrefPrevButton.click();
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		//submit the new enquiry form
 		submitSaveButton = driver.findElement(By.id("submit_enquiry"));

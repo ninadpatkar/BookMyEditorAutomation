@@ -1,9 +1,11 @@
 package PageObjectModel;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ViewBookingPage {
 	WebDriver driver;
-	WebElement initiateWithoutEmailButton, cancelreasonSelect, cancelreasonText, cancelWithoutMailButton, wfmActionDropdown ;
+	WebElement initiateWithoutEmailButton, cancelreasonSelect, cancelreasonText, cancelWithoutMailButton, wfmActionDropdown, initiateWithEmailButton ;
 	WebDriverWait wait;
 	
 	public ViewBookingPage(WebDriver driver) {
@@ -34,19 +36,23 @@ public class ViewBookingPage {
 		
 		initializeButton.click();
 		System.out.println("Selecting the initialize booking menu option");
-		Thread.sleep(6000);
-		
+		Thread.sleep(8000);
+
 		//selecting initialize without customer email option
-		initiateWithoutEmailButton = driver.findElement(By.id("initiate-request-no-email_save"));
-		initiateWithoutEmailButton.click();
-		System.out.println("Selecting the initialize without email option");
+		initiateWithEmailButton = driver.findElement(By.id("initiate-request-email_save"));
+		
+		/*Actions act = new Actions(driver);
+		act.moveToElement(initiateWithEmailButton).click().build().perform();*/
+		
+		JavascriptExecutor je = (JavascriptExecutor) driver;
+		je.executeScript("arguments[0].scrollIntoView(true);",driver.findElement(By.xpath("//span[text()='Initiate Booking Request']")));
+		
+		initiateWithEmailButton.click();
+		System.out.println("Selecting the initialize with email option");
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
-		/*//locating wfm action dropdown for FL actions
-		Thread.sleep(5000);
-		wfmActionDropdown = driver.findElement(By.xpath("//div[@id='bme']/div[5]/div[@class='col-md-8 jobs-left-row']/div[@class='box']/div[@class='box-body']/div[@class='row']/div[@class='col-sm-12']//table[@class='table']//button[@class='btn btn-grey dropdown-toggle']"));*/
 	}
 	
 	/*Function to cancel booking
@@ -118,5 +124,12 @@ public class ViewBookingPage {
 	public String getBookingStatus() {
 		String bookingStatus = driver.findElement(By.xpath("//span[contains(@class,'jobs-header-status')]")).getText();
 		return bookingStatus;
+	}
+	
+	public String getFLResponse(String flName) {
+		String xpathFLResponse = "//a[contains(text(),'"+flName+"')]//parent::div//parent::td//following-sibling::td[1]//div";
+		
+		String flResponse = driver.findElement(By.xpath(xpathFLResponse)).getText();
+		return flResponse.trim();
 	}
 }

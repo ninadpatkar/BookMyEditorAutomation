@@ -12,7 +12,7 @@ public class FLDashboardPage {
 	
 	WebDriver driver;
 	WebDriverWait wait;
-	WebElement respondButton, acceptBookingOption, closeEarningDashboardButton;
+	WebElement respondButton, acceptBookingOption, closeEarningDashboardButton, rejectBookingOption, tentativeAcceptBookingOption, rejectReasonNotAvailable, rejectReasonSubmit, tentativeBookingOption, tentativeReasonOther, tentativeReasonOtherText, tentativeReasonSubmit;
 	
 	public FLDashboardPage(WebDriver driver) {
 		this.driver = driver;
@@ -48,7 +48,7 @@ public class FLDashboardPage {
 	
 	
 	/*
-	 * Function to accept first booking from the list
+	 * Function to accept given booking from the list
 	*/
 	public void acceptBooking(String bookingTitle) throws InterruptedException {
 		//Waiting until the loader is gone.
@@ -58,7 +58,7 @@ public class FLDashboardPage {
 		clickAvailableAssignmentsTab();
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		String xpathRespondButton = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//button[contains(text(),'Respond')]";
 		
@@ -72,13 +72,14 @@ public class FLDashboardPage {
 		acceptBookingOption = driver.findElement(By.linkText("Accept request"));
 		acceptBookingOption.click();
 		System.out.println("Selecting the accept booking option");
+		System.out.println("Booking "+bookingTitle+" accepted from FL");
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 	}
 	
 	/*
-	 * Function to reject first booking from the list
+	 * Function to reject given booking from the list
 	*/
 	public void rejectBooking(String bookingTitle) throws InterruptedException {
 		//Waiting until the loader is gone.
@@ -88,7 +89,7 @@ public class FLDashboardPage {
 		clickAvailableAssignmentsTab();
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 		
 		String xpathRespondButton = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//button[contains(text(),'Respond')]";
 		
@@ -99,22 +100,85 @@ public class FLDashboardPage {
 
 		Thread.sleep(2000);
 		
-		acceptBookingOption = driver.findElement(By.linkText("Reject request"));
-		acceptBookingOption.click();
+		rejectBookingOption = driver.findElement(By.linkText("Reject request"));
+		rejectBookingOption.click();
 		System.out.println("Selecting the reject booking option");
 		
-		//selecting first rejet reason 'Not available'
+		Thread.sleep(2000);
 		
+		//selecting first rejet reason 'Not available'
+		String xpathRejectReason = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//input[@value='83718']";
+		rejectReasonNotAvailable = driver.findElement(By.xpath(xpathRejectReason));
+		rejectReasonNotAvailable.click();
+		System.out.println("Selecting the reject reason as Not Available");
+		
+		//selecting first rejet reason 'Not available'
+		String xpathSubmitRejectReason = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//button[@action-name='workerRejectBooking']";
+		rejectReasonSubmit = driver.findElement(By.xpath(xpathSubmitRejectReason));
+		rejectReasonSubmit.click();
+		System.out.println("Selecting the save reject reason button");
+		System.out.println("Booking "+bookingTitle+" rejected from FL");
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("preloader")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 	}
 	
-	public void closeEarningsDashboard() {
+	/*
+	 * Function to tentatively accept given booking from the list
+	*/
+	public void tentativeAcceptBooking(String bookingTitle) throws InterruptedException {
+		//Waiting until the loader is gone.
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("modal-1")));
 		
+		wait.until(ExpectedConditions.elementToBeClickable(availableAssignmentsTab));
+		clickAvailableAssignmentsTab();
 		
 		//Waiting until the loader is gone.
-		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("/html//div[@id='preloader']")));
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
+		
+		String xpathRespondButton = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//button[contains(text(),'Respond')]";
+		
+		//table[@id='collapsableTable']/tbody/tr[2]/td[7]//button[@class='btn btn-secondary dropdown-toggle']
+		respondButton = driver.findElement(By.xpath(xpathRespondButton));
+		respondButton.click();
+		System.out.println("Selecting the Respond option for the booking :"+bookingTitle);
+
+		Thread.sleep(2000);
+		
+		tentativeBookingOption = driver.findElement(By.linkText("Need more time"));
+		tentativeBookingOption.click();
+		System.out.println("Selecting the tentatively accept booking option");
+		
+		Thread.sleep(2000);
+		
+		//selecting tentative reason 'Other'
+		String xpathtentativeReason = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//input[@value='83717']";
+		tentativeReasonOther = driver.findElement(By.xpath(xpathtentativeReason));
+		tentativeReasonOther.click();
+		
+		String xpathtentativeReasonOtherText = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//input[@class='form-control reject-input tentative-reason-other-conditional']";
+		tentativeReasonOtherText = driver.findElement(By.xpath(xpathtentativeReasonOtherText));
+		tentativeReasonOtherText.sendKeys("Test Reason for Tentative accept");
+		
+		System.out.println("Selecting the tentative reason as Other");
+		
+		//selecting first rejet reason 'Not available'
+		String xpathSubmittentativeReason = "//span[text()='"+bookingTitle+"']//parent::td//following-sibling::td[6]//button[@action-name='workerTentativeBooking']";
+		tentativeReasonSubmit = driver.findElement(By.xpath(xpathSubmittentativeReason));
+		tentativeReasonSubmit.click();
+		System.out.println("Selecting the save tentative accept reason button");
+		System.out.println("Booking "+bookingTitle+" tentatively accepted from FL");
+		
+		//Waiting until the loader is gone.
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
+	}
+	
+	/*
+	 * Function to close the earnings dashboard displayed on login to FL Dashboard
+	*/
+	public void closeEarningsDashboard() {
+		//Waiting until the loader is gone.
+		wait.until(ExpectedConditions.invisibilityOfAllElements(driver.findElements(By.id("preloader"))));
 			
 		//driver.navigate().refresh();
 		

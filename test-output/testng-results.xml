@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="3" passed="3">
   <reporter-output>
   </reporter-output>
-  <suite name="BookMyEditor TestSuite" duration-ms="136623" started-at="2019-04-01T13:34:53Z" finished-at="2019-04-01T13:37:09Z">
+  <suite name="BookMyEditor TestSuite" duration-ms="364615" started-at="2019-04-19T11:46:05Z" finished-at="2019-04-19T11:52:10Z">
     <groups>
     </groups>
-    <test name="createInitializeAcceptBooking" duration-ms="136623" started-at="2019-04-01T13:34:53Z" finished-at="2019-04-01T13:37:09Z">
-      <class name="TestCases.CreateBookingRequest">
-        <test-method status="PASS" signature="startUp()[pri:0, instance:TestCases.CreateBookingRequest@4b952a2d]" name="startUp" is-config="true" duration-ms="8357" started-at="2019-04-01T19:04:53Z" finished-at="2019-04-01T19:05:01Z">
+    <test name="createInitializeAcceptBooking" duration-ms="364615" started-at="2019-04-19T11:46:05Z" finished-at="2019-04-19T11:52:10Z">
+      <class name="TestCases.CreateBookingAndRejectTest">
+        <test-method status="PASS" signature="testSetup()[pri:0, instance:TestCases.CreateBookingAndRejectTest@4bec1f0c]" name="testSetup" is-config="true" duration-ms="4581" started-at="2019-04-19T17:18:08Z" finished-at="2019-04-19T17:18:13Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- startUp -->
-        <test-method status="PASS" signature="createBookingOneFL(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:0, instance:TestCases.CreateBookingRequest@4b952a2d]" name="createBookingOneFL" duration-ms="123618" started-at="2019-04-01T19:05:02Z" data-provider="inputsBME" finished-at="2019-04-01T19:07:05Z">
+        </test-method> <!-- testSetup -->
+        <test-method status="PASS" signature="createBookingReject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:2, instance:TestCases.CreateBookingAndRejectTest@4bec1f0c]" name="createBookingReject" duration-ms="114869" started-at="2019-04-19T17:18:13Z" data-provider="inputsBME" finished-at="2019-04-19T17:20:08Z">
           <params>
             <param index="0">
               <value>
@@ -81,12 +81,174 @@
           </params>
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- createBookingOneFL -->
-        <test-method status="PASS" signature="tearDown()[pri:0, instance:TestCases.CreateBookingRequest@4b952a2d]" name="tearDown" is-config="true" duration-ms="3867" started-at="2019-04-01T19:07:05Z" finished-at="2019-04-01T19:07:09Z">
+        </test-method> <!-- createBookingReject -->
+        <test-method status="PASS" signature="testClose()[pri:0, instance:TestCases.CreateBookingAndRejectTest@4bec1f0c]" name="testClose" is-config="true" duration-ms="3904" started-at="2019-04-19T17:20:08Z" finished-at="2019-04-19T17:20:11Z">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- tearDown -->
-      </class> <!-- TestCases.CreateBookingRequest -->
+        </test-method> <!-- testClose -->
+      </class> <!-- TestCases.CreateBookingAndRejectTest -->
+      <class name="TestCases.CreateBookingAndTentativeAcceptTest">
+        <test-method status="PASS" signature="testSetup()[pri:0, instance:TestCases.CreateBookingAndTentativeAcceptTest@29ca901e]" name="testSetup" is-config="true" duration-ms="4512" started-at="2019-04-19T17:20:12Z" finished-at="2019-04-19T17:20:16Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetup -->
+        <test-method status="PASS" signature="createBookingTentativeAccept(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:3, instance:TestCases.CreateBookingAndTentativeAcceptTest@29ca901e]" name="createBookingTentativeAccept" duration-ms="109646" started-at="2019-04-19T17:20:16Z" data-provider="inputsBME" finished-at="2019-04-19T17:22:06Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[dhanashria@cactusglobal.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[C1234567]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[testninadeng6@mailinator.com]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Standard Editing]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[Abstract]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[Chemistry]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[Normal]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Test project]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[31/03/2019 18:18]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[test]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[test1qg2kem7@mailinator.com]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[test1qg2kem7]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createBookingTentativeAccept -->
+        <test-method status="PASS" signature="testClose()[pri:0, instance:TestCases.CreateBookingAndTentativeAcceptTest@29ca901e]" name="testClose" is-config="true" duration-ms="3802" started-at="2019-04-19T17:22:06Z" finished-at="2019-04-19T17:22:10Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClose -->
+      </class> <!-- TestCases.CreateBookingAndTentativeAcceptTest -->
+      <class name="TestCases.CreateBookingAndAcceptTest">
+        <test-method status="PASS" signature="testSetup()[pri:0, instance:TestCases.CreateBookingAndAcceptTest@73846619]" name="testSetup" is-config="true" duration-ms="6102" started-at="2019-04-19T17:16:06Z" finished-at="2019-04-19T17:16:12Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetup -->
+        <test-method status="PASS" signature="createBookingAccept(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)[pri:1, instance:TestCases.CreateBookingAndAcceptTest@73846619]" name="createBookingAccept" duration-ms="112301" started-at="2019-04-19T17:16:12Z" data-provider="inputsBME" finished-at="2019-04-19T17:18:04Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[dhanashria@cactusglobal.com]]>
+              </value>
+            </param>
+            <param index="1">
+              <value>
+                <![CDATA[C1234567]]>
+              </value>
+            </param>
+            <param index="2">
+              <value>
+                <![CDATA[testninadeng6@mailinator.com]]>
+              </value>
+            </param>
+            <param index="3">
+              <value>
+                <![CDATA[Standard Editing]]>
+              </value>
+            </param>
+            <param index="4">
+              <value>
+                <![CDATA[Abstract]]>
+              </value>
+            </param>
+            <param index="5">
+              <value>
+                <![CDATA[Chemistry]]>
+              </value>
+            </param>
+            <param index="6">
+              <value>
+                <![CDATA[Normal]]>
+              </value>
+            </param>
+            <param index="7">
+              <value>
+                <![CDATA[100]]>
+              </value>
+            </param>
+            <param index="8">
+              <value>
+                <![CDATA[Test project]]>
+              </value>
+            </param>
+            <param index="9">
+              <value>
+                <![CDATA[31/03/2019 18:18]]>
+              </value>
+            </param>
+            <param index="10">
+              <value>
+                <![CDATA[test]]>
+              </value>
+            </param>
+            <param index="11">
+              <value>
+                <![CDATA[test1qg2kem7@mailinator.com]]>
+              </value>
+            </param>
+            <param index="12">
+              <value>
+                <![CDATA[test1qg2kem7]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- createBookingAccept -->
+        <test-method status="PASS" signature="testClose()[pri:0, instance:TestCases.CreateBookingAndAcceptTest@73846619]" name="testClose" is-config="true" duration-ms="3905" started-at="2019-04-19T17:18:04Z" finished-at="2019-04-19T17:18:08Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testClose -->
+      </class> <!-- TestCases.CreateBookingAndAcceptTest -->
     </test> <!-- createInitializeAcceptBooking -->
   </suite> <!-- BookMyEditor TestSuite -->
 </testng-results>
