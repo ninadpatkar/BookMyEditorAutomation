@@ -1,15 +1,6 @@
-package TestCases;
+package com.cactus.BME.testCases;
 
 import org.testng.annotations.Test;
-import PageObjectModel.AddNewEnquiryPage;
-import PageObjectModel.CreateBookingPage;
-import PageObjectModel.CrmLoginPage;
-import PageObjectModel.CrmTopHeader;
-import PageObjectModel.FLDashboardPage;
-import PageObjectModel.InquiryPage;
-import PageObjectModel.ViewBookingPage;
-import Utilities.BMETestData;
-import Utilities.Constants;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +14,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
+
+import com.cactus.BME.PageObjectModel.AddNewEnquiryPage;
+import com.cactus.BME.PageObjectModel.CreateBookingPage;
+import com.cactus.BME.PageObjectModel.CrmLoginPage;
+import com.cactus.BME.PageObjectModel.CrmTopHeader;
+import com.cactus.BME.PageObjectModel.FLDashboardPage;
+import com.cactus.BME.PageObjectModel.InquiryPage;
+import com.cactus.BME.PageObjectModel.ViewBookingPage;
+import com.cactus.Utility.BMETestData;
+import com.cactus.Utility.Constants;
 
 
 public class CreateBookingAndAcceptTest {

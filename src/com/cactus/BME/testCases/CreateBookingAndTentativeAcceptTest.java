@@ -1,15 +1,6 @@
-package TestCases;
+package com.cactus.BME.testCases;
 
 import org.testng.annotations.Test;
-import PageObjectModel.AddNewEnquiryPage;
-import PageObjectModel.CreateBookingPage;
-import PageObjectModel.CrmLoginPage;
-import PageObjectModel.CrmTopHeader;
-import PageObjectModel.FLDashboardPage;
-import PageObjectModel.InquiryPage;
-import PageObjectModel.ViewBookingPage;
-import Utilities.BMETestData;
-import Utilities.Constants;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,8 +15,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
 
+import com.cactus.BME.PageObjectModel.AddNewEnquiryPage;
+import com.cactus.BME.PageObjectModel.CreateBookingPage;
+import com.cactus.BME.PageObjectModel.CrmLoginPage;
+import com.cactus.BME.PageObjectModel.CrmTopHeader;
+import com.cactus.BME.PageObjectModel.FLDashboardPage;
+import com.cactus.BME.PageObjectModel.InquiryPage;
+import com.cactus.BME.PageObjectModel.ViewBookingPage;
+import com.cactus.Utility.BMETestData;
+import com.cactus.Utility.Constants;
 
-public class CreateBookingAndRejectTest {
+
+public class CreateBookingAndTentativeAcceptTest {
 	WebDriver driver;
 	
 	//declared wait object for explicit wait
@@ -47,12 +48,12 @@ public class CreateBookingAndRejectTest {
 	//initilizing soft assert object
 	SoftAssert sa = new SoftAssert();
 	
-	/*	 
-	 *  Test case creates an INQ, creates and initializes a booking, assigns to one FL, and rejects from the FL Dashboard
-	 * 	@params input parameters for INQ, Booking, login credentials for CM and FL
+	/*
+	  Test case creates an INQ, creates and initializes a booking, assigns to one FL, and tentatively accepts from the FL Dashboard
+	  @params input parameters for INQ, Booking, login credentials for CM and FL
 	*/
-	@Test(dataProvider="inputsBME", dataProviderClass=BMETestData.class, priority=2)
-	public void createBookingReject(String login_email, String login_passwd, String email, String service, String document, String subject, String enquiry, String units, String title, String job_date, String editor, String login_email_fl, String login_passwd_fl ) throws InterruptedException {
+	@Test(dataProvider="inputsBME", dataProviderClass=BMETestData.class, priority=3)
+	public void createBookingTentativeAccept(String login_email, String login_passwd, String email, String service, String document, String subject, String enquiry, String units, String title, String job_date, String editor, String login_email_fl, String login_passwd_fl ) throws InterruptedException {
 		
 		//Open CRM url
 		driver.get(Constants.CRM_URL);
@@ -159,7 +160,7 @@ public class CreateBookingAndRejectTest {
 		pg_flDashboard.closeEarningsDashboard();
 		
 		//accepting the booking request
-		pg_flDashboard.rejectBooking(bookingTitle);
+		pg_flDashboard.tentativeAcceptBooking(bookingTitle);
 		
 		//logout from FL Dashboard
 		pg_TopHeader.clickLogoutSubmenu();
@@ -179,15 +180,15 @@ public class CreateBookingAndRejectTest {
 		bookingStatus = pg_viewBooking.getBookingStatus();
 		
 		//Assert on the status of the booking
-		sa.assertEquals(bookingStatus, "REJECTED");
+		sa.assertEquals(bookingStatus, "PENDING");
 		
 		System.out.println("Booking with title "+bookingTitle+" is in status : "+bookingStatus);
 		
 		//fetching status of the fl response
 		String flResponseStatus = pg_viewBooking.getFLResponse(editor);
-				
+						
 		//Assert on the status of the fl response
-		sa.assertEquals(flResponseStatus, "Rejected");
+		sa.assertEquals(flResponseStatus, "Tentatively accepted");
 		
 		System.out.println("FL "+editor+" response for booking "+bookingTitle+" is : "+flResponseStatus);
 		
