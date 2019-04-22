@@ -1,4 +1,4 @@
-package PageObjectModel;
+package com.cactus.BME.PageObjectModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
